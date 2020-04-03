@@ -1,0 +1,62 @@
+database:
+  # the name of your JDBC driver
+  driverClass: com.mysql.cj.jdbc.Driver
+
+  # the username
+  user: the_pr
+
+  # the password
+  password: west9!9storK
+
+  # the JDBC URL
+  url: jdbc:mysql://localhost:3306/TutorCorp?allowPublicKeyRetrieval=true&serverTimezone=America/New_York&useSSL=false
+  #  url: jdbc:mysql://35.236.212.170:3306/TutorCorps?allowPublicKeyRetrieval=true&serverTimezone=America/New_York&useSSL=false
+
+server:
+  # ports & protocol to run the application on
+  applicationConnectors:
+    - type: http
+      port: 8080
+  #    - type: https
+  #      port: 8443
+  #      keyStorePath: example.keystore
+  #      keyStorePassword: example
+  # admin ports & protocol
+  adminConnectors:
+    - type: http
+      port: 8081
+#    - type: https
+#      port: 8444
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.tutor.resource' to DEBUG.
+    com.tutor.resource: DEBUG
+
+    # Redirects SQL logs to a separate file
+    org.hibernate.SQL:
+      level: DEBUG
+
+  # Logback's Time Based Rolling Policy - archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}.log.gz
+  # Logback's Size and Time Based Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz
+  # Logback's Fixed Window Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%i.log.gz
+
+  appenders:
+    - type: console
+    - type: file
+      threshold: INFO
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      currentLogFilename: /tmp/application.log
+      archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 7
+      timeZone: UTC
+      maxFileSize: 10MiB

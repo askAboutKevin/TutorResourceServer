@@ -7,23 +7,26 @@ import org.jdbi.v3.core.mapper.reflect.ColumnName;
 public class Student {
 
     private int id;
-    private int tutor_id;
+    private int tutorDailyTrackerId;
     private int school;
-    private String name;
+    private String firstName;
+    private String lastName;
 
-    public Student(int id, int tutor_id, int school, String name) {
+    public Student(int id, int tutorDailyTrackerId, int school, String firstName, String lastName) {
         this.id = id;
-        this.tutor_id = tutor_id;
+        this.tutorDailyTrackerId = tutorDailyTrackerId;
         this.school = school;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     // Constructor for incoming requests
     @JsonCreator
-    public Student(@JsonProperty("tutor_id") int tutor_id, @JsonProperty("school") int school, @JsonProperty("name") String name) {
-        this.tutor_id = tutor_id;
+    public Student(@JsonProperty("tutor_id") int tutorDailyTrackerId, @JsonProperty("school") int school, @JsonProperty("firstname") String firstName, @JsonProperty("lastname") String lastName) {
+        this.tutorDailyTrackerId = tutorDailyTrackerId;
         this.school = school;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @ColumnName("id")
@@ -36,12 +39,12 @@ public class Student {
     }
 
     @ColumnName("tutor_id")
-    public int getTutor_id() {
-        return tutor_id;
+    public int getTutorDailyTrackerId() {
+        return tutorDailyTrackerId;
     }
 
-    public void setTutor_id(int tutor_id) {
-        this.tutor_id = tutor_id;
+    public void setTutorDailyTrackerId(int tutorDailyTrackerId) {
+        this.tutorDailyTrackerId = tutorDailyTrackerId;
     }
 
     @ColumnName("school")
@@ -53,12 +56,19 @@ public class Student {
         this.school = school;
     }
 
-    @ColumnName("name")
-    public String getName() {
-        return name;
+    @ColumnName("first_name")
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
+
+    @ColumnName("last_name")
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {  this.lastName = lastName; }
 }

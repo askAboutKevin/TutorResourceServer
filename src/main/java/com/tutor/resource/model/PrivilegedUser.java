@@ -9,7 +9,7 @@ public class PrivilegedUser {
 
     private String id;
     private String firstName;
-    private String last_name;
+    private String lastName;
     private String salt;
     private String password_hash;
     private String email;
@@ -19,10 +19,10 @@ public class PrivilegedUser {
     private String lastLoggedIn;
     private String picture;
 
-    public PrivilegedUser(String id, String firstName, String last_name, String salt, String password_hash, String email, String contact_number, String title, String role, String lastLoggedIn, String picture) {
+    public PrivilegedUser(String id, String firstName, String lastName, String salt, String password_hash, String email, String contact_number, String title, String role, String lastLoggedIn, String picture) {
         this.id = id;
         this.firstName = firstName;
-        this.last_name = last_name;
+        this.lastName = lastName;
         this.salt = salt;
         this.password_hash = password_hash;
         this.email = email;
@@ -36,7 +36,7 @@ public class PrivilegedUser {
     // Constructor for incoming requests
     @JsonCreator
     public PrivilegedUser(@JsonProperty("first") String firstName,
-                          @JsonProperty("last") String last_name,
+                          @JsonProperty("last") String lastName,
                           @JsonProperty("password") String password_hash,
                           @JsonProperty("email") String email,
                           @JsonProperty("number") String contact_number,
@@ -45,7 +45,7 @@ public class PrivilegedUser {
                           @JsonProperty("picture") String picture
     ) {
         this.firstName = firstName;
-        this.last_name = last_name;
+        this.lastName = lastName;
         this.password_hash = password_hash;
         this.email = email;
         this.contact_number = contact_number;
@@ -73,12 +73,12 @@ public class PrivilegedUser {
     }
 
     @ColumnName("last_name")
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @ColumnName("salt")

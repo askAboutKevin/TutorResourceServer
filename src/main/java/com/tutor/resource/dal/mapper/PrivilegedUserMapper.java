@@ -17,12 +17,12 @@ public class PrivilegedUserMapper implements RowMapper<PrivilegedUser> {
                 resultSet.getString("first_name"),
                 resultSet.getString("last_name"),
                 resultSet.getString("salt"),
-                resultSet.getString("password_hash"),
+                resultSet.getString("password"),
                 resultSet.getString("email"),
-                resultSet.getString("contact_number"),
+                resultSet.getString("number"),
                 resultSet.getString("title"),
                 resultSet.getString("role"),
                 resultSet.getString("last_logged_in"),
-                resultSet.getString("portfolio_image")
+                resultSet.getString("picture")
         );    }
 }

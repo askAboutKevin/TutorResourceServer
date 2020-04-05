@@ -25,13 +25,12 @@ public class EventResource {
     public Response fetchEvents() {
 
         List<Event> events = this.eventService.selectAllEvents();
-        if(events != null) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(events)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(events)
+                .build();
+
     }
 
     @GET
@@ -39,85 +38,59 @@ public class EventResource {
     public Response fetchEventById(@PathParam("id") int id) {
 
         Event event = this.eventService.selectEventById(id);
-        if(event != null) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(event)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(event)
+                .build();
     }
 
     @POST
-    public Response createDepartment(@QueryParam("title") String title,
-                                     @QueryParam("start") Date start,
-                                     @QueryParam("end") Date end,
-                                     @QueryParam("location") String location,
-                                     @QueryParam("contact") String contact,
-                                     @QueryParam("details") String details,
-                                     @QueryParam("reoccurring") String reoccurring) {
+    public Response createEvent(Event event) {
 
-        int created = this.eventService.insertEvent(title, start, end, location, contact, details, reoccurring);
+        int created = this.eventService.insertEvent(
+                event.getTitle(),
+                event.getStart(),
+                event.getEnd(),
+                event.getLocation(),
+                event.getContact(),
+                event.getDetails(),
+                event.getReoccurring()
+        );
 
-        if(created == 1) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(true)
-                    .build();
-        }
-        else if(created == 0) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(created == 1)
+                .build();
     }
 
-    @PUT
-    public Response updateEvent(@QueryParam("title") String title,
-                                @QueryParam("start") Date start,
-                                @QueryParam("end") Date end,
-                                @QueryParam("location") String location,
-                                @QueryParam("contact") String contact,
-                                @QueryParam("details") String details,
-                                @QueryParam("reoccurring") String reoccurring,
-                                @QueryParam("id") int id) {
-
-        int updated = this.eventService.updateEvent(title, start, end, location, contact, details, reoccurring, id);
-
-        if(updated == 1) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(true)
-                    .build();
-        }
-        else if(updated == 0) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
+//    @PUT
+//    public Response updateEvent(@QueryParam("title") String title,
+//                                @QueryParam("start") Date start,
+//                                @QueryParam("end") Date end,
+//                                @QueryParam("location") String location,
+//                                @QueryParam("contact") String contact,
+//                                @QueryParam("details") String details,
+//                                @QueryParam("reoccurring") String reoccurring,
+//                                @QueryParam("id") int id) {
+//
+//        int updated = this.eventService.updateEvent(title, start, end, location, contact, details, reoccurring, id);
+//
+//        return Response
+//                .status(Response.Status.OK)
+//                .entity(updated == 1)
+//                .build();
+//    }
 
     @DELETE
-    public Response deleteEvent(@QueryParam("id") int id) {
+    @Path("/{id}")
+    public Response deleteEvent(@PathParam("id") int id) {
 
         int deleted = this.eventService.deleteEvent(id);
 
-        if(deleted == 1) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(true)
-                    .build();
-        }
-        else if(deleted == 0) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.OK)
+                .entity(deleted == 1)
+                .build();
     }
 }

@@ -33,38 +33,38 @@ public class PrivilegedUserService {
         return privilegedUser;
     }
 
-    public int insertPrivilegedUser(String firstName, String lastName, String password, String email, String contactNumber, String title, String role, String portfolioImage) {
-
-        String id = UniqueIdGenerator.generate("user");
-        String salt = SecureSalt.generateSalt();
-        String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
-
-        int addedPrivilegedUser = this.privilegedUserDAO.insertPrivilegedUser(
-                id, firstName, lastName, salt, hash, email, contactNumber, title, role, portfolioImage
-        );
-
-        return addedPrivilegedUser;
-    }
-
-    public int updatePrivilegedUser( String firstName, String lastName, String password, String email, String contactNumber, String title, String role, String portfolioImage, String id) {
-
-        if(id.length() < 8) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-
-        String salt = SecureSalt.generateSalt();
-        String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
-
-        int updatedPrivilegedUser = this.privilegedUserDAO.updatePrivilegedUser(firstName, lastName, salt, hash, email, contactNumber, title, role, portfolioImage, id);
-
-        return updatedPrivilegedUser;
-    }
-
-    public int deletePrivilegedUser(String id) {
-        if(id.length() < 8) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-        int deletedPrivilegedUser = this.privilegedUserDAO.deletePrivilegedUser(id);
-        return deletedPrivilegedUser;
-    }
+//    public int insertPrivilegedUser(String firstName, String lastName, String password, String email, String contactNumber, String title, String role, String portfolioImage) {
+//
+//        String id = UniqueIdGenerator.generate("user");
+//        String salt = SecureSalt.generateSalt();
+//        String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
+//
+//        int addedPrivilegedUser = this.privilegedUserDAO.insertPrivilegedUser(
+//                id, firstName, lastName, salt, hash, email, contactNumber, title, role, portfolioImage
+//        );
+//
+//        return addedPrivilegedUser;
+//    }
+//
+//    public int updatePrivilegedUser( String firstName, String lastName, String password, String email, String contactNumber, String title, String role, String portfolioImage, String id) {
+//
+//        if(id.length() < 8) {
+//            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+//        }
+//
+//        String salt = SecureSalt.generateSalt();
+//        String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
+//
+//        int updatedPrivilegedUser = this.privilegedUserDAO.updatePrivilegedUser(firstName, lastName, salt, hash, email, contactNumber, title, role, portfolioImage, id);
+//
+//        return updatedPrivilegedUser;
+//    }
+//
+//    public int deletePrivilegedUser(String id) {
+//        if(id.length() < 8) {
+//            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+//        }
+//        int deletedPrivilegedUser = this.privilegedUserDAO.deletePrivilegedUser(id);
+//        return deletedPrivilegedUser;
+//    }
 }

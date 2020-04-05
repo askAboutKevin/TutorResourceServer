@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface SchoolService {
 
-    List<School> getAll();
+    List<School> getAllSchools();
 
-    School getById(int id);
+    School getSchoolById(int id);
 
-    int updateSchool(String name, String streetAddress, String city, String state, String zipCode, String ncesNumber, String longitude, String latitude, String siteSupervisor, int id);
+//    int updateSchool(String name, String streetAddress, String city, String state, String zipCode, String ncesNumber, String longitude, String latitude, String siteSupervisor, int id);
 
     int addSchool(String name, String streetAddress, String city, String state, String zipCode, String ncesNumber, String siteSupervisor);
 

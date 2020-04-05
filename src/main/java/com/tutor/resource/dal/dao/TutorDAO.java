@@ -11,15 +11,15 @@ import java.util.List;
 
 public interface TutorDAO {
 
-    @SqlQuery("SELECT id, topic, first_name, last_name, school, university, supervisor, department, salt, password, email, number, daily_tracker_id FROM Tutor")
+    @SqlQuery("SELECT id, attended_orientation, topic, first_name, last_name, school, university, supervisor, department, salt, password, email, number, daily_tracker_id, last_logged_in, image, ssn FROM Tutor")
     @RegisterRowMapper(TutorMapper.class)
     List<Tutor> selectAllTutors();
 
-    @SqlQuery("SELECT id, topic, first_name, last_name, school, university, supervisor, department, salt, password_hash, email, number, daily_tracker_id FROM Tutor WHERE id = ?")
+    @SqlQuery("SELECT id, attended_orientation, topic, first_name, last_name, school, university, supervisor, department, salt, password, email, number, daily_tracker_id, last_logged_in, image, ssn FROM Tutor WHERE id = ?")
     @RegisterRowMapper(TutorMapper.class)
     Tutor selectTutorById(String id);
 
-    @SqlQuery("SELECT id, topic, first_name, last_name, school, university, supervisor, department, salt, password_hash, email, number, daily_tracker_id FROM Tutor WHERE id = ?")
+    @SqlQuery("SELECT id, attended_orientation, topic, first_name, last_name, school, university, supervisor, department, salt, password, email, number, daily_tracker_id, last_logged_in, image, ssn FROM Tutor WHERE email = ?")
     @RegisterRowMapper(TutorMapper.class)
     Tutor selectTutorByEmail(String email);
 

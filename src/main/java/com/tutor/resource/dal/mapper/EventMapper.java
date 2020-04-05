@@ -14,8 +14,8 @@ public class EventMapper implements RowMapper<Event> {
         return new Event(
                 resultSet.getInt("id"),
                 resultSet.getString("title"),
-                resultSet.getDate("start"),
-                resultSet.getDate("end"),
+                resultSet.getString("start"),
+                resultSet.getString("end"),
                 resultSet.getString("location"),
                 resultSet.getString("contact"),
                 resultSet.getString("details"),

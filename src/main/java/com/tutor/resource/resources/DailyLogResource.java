@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/log")
+@Path("/daily-log")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class DailyLogResource {
@@ -26,13 +26,10 @@ public class DailyLogResource {
 
         List<DailyLog> logs = this.dailyLogService.getDailyLogsByTutor(id);
 
-        if (logs != null) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(logs)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.OK)
+                .entity(logs)
+                .build();
     }
 
     @POST
@@ -53,39 +50,21 @@ public class DailyLogResource {
                 dailyLog.getSessionMaterial()
         );
 
-        if(created == 1) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(true)
-                    .build();
-        }
-        else if(created == 0) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(created == 1)
+                .build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response deleteDailyLog(@PathParam("id") int id) {
 
-        int created = this.dailyLogService.deleteDailyLog(id);
+        int deleted = this.dailyLogService.deleteDailyLog(id);
 
-        if(created == 1) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(true)
-                    .build();
-        }
-        else if(created == 0) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(deleted == 1)
+                .build();
     }
 }

@@ -18,12 +18,12 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public List<School> getAll() {
+    public List<School> getAllSchools() {
         return this.schoolDAO.selectAllSchools();
     }
 
     @Override
-    public School getById(int id) {
+    public School getSchoolById(int id) {
 
         if(id < 1) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
@@ -31,32 +31,33 @@ public class SchoolServiceImpl implements SchoolService {
         return this.schoolDAO.selectSchoolById(id);
     }
 
-    @Override
-    public int updateSchool(String name, String streetAddress, String city, String state, String zipCode, String ncesNumber, String longitude, String latitude, String siteSupervisor, int id) {
-
-        if(id < 1) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-
-        boolean updateSchoolSuccess = (
-                1 == this.schoolDAO.updateSchool(name,
-                        streetAddress,
-                        city,
-                        state,
-                        zipCode,
-                        ncesNumber,
-                        longitude,
-                        latitude,
-                        siteSupervisor,
-                        id
-                ));
-
-        if(updateSchoolSuccess) {
-            return 1;
-        }
-
-        return 0;
-    }
+//    @Override
+//    public int updateSchool(String name, String streetAddress, String city, String state, String zipCode, String ncesNumber, String longitude, String latitude, String siteSupervisor, int id) {
+//
+//        if(id < 1) {
+//            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+//        }
+//
+//        boolean updateSchoolSuccess = (
+//                1 == this.schoolDAO.updateSchool(
+//                        name,
+//                        streetAddress,
+//                        city,
+//                        state,
+//                        zipCode,
+//                        ncesNumber,
+//                        longitude,
+//                        latitude,
+//                        siteSupervisor,
+//                        id
+//                ));
+//
+//        if(updateSchoolSuccess) {
+//            return 1;
+//        }
+//
+//        return 0;
+//    }
 
     @Override
     public int addSchool(String name, String streetAddress, String city, String state, String zipCode, String ncesNumber, String siteSupervisor) {

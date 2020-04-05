@@ -24,15 +24,15 @@ public class EventService {
         return event;
     }
 
-    public int insertEvent(String title, Date start, Date end, String location, String contact, String details, String reoccurring) {
+    public int insertEvent(String title, String start, String end, String location, String contact, String details, String reoccurring) {
         int addedEvent = this.eventDAO.insertEvent(title, start, end, location, contact, details, reoccurring);
         return addedEvent;
     }
 
-    public int updateEvent(String title, Date start, Date end, String location, String contact, String details, String reoccurring, int id) {
-        int updatedEvent = this.eventDAO.updateEvent(title, start, end, location, contact, details, reoccurring, id);
-        return updatedEvent;
-    }
+//    public int updateEvent(String title, Date start, Date end, String location, String contact, String details, String reoccurring, int id) {
+//        int updatedEvent = this.eventDAO.updateEvent(title, start, end, location, contact, details, reoccurring, id);
+//        return updatedEvent;
+//    }
 
     public int deleteEvent(int id) {
         int deletedEvents = this.eventDAO.deleteEvent(id);

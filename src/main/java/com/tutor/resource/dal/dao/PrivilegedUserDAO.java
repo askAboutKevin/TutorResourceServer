@@ -14,16 +14,16 @@ public interface PrivilegedUserDAO {
     @RegisterRowMapper(PrivilegedUserMapper.class)
     List<PrivilegedUser> selectAllPrivilegedUsers();
 
-    @SqlQuery("SELECT id, first_name, last_name, salt, password, email, contact, last_logged_in, title, role, picture FROM Privileged_User WHERE id = ?")
+    @SqlQuery("SELECT id, first_name, last_name, salt, password, email, number, last_logged_in, title, role, picture FROM Privileged_User WHERE id = ?")
     @RegisterRowMapper(PrivilegedUserMapper.class)
     PrivilegedUser selectPrivilegedUserById(String id);
 
-    @SqlUpdate("INSERT INTO Privileged_User (id, first_name, last_name, salt, password_hash, email, contact_number, title, role, picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-    int insertPrivilegedUser(String id, String firstName, String lastName, String salt, String passwordHash, String email, String contactNumber, String title, String role, String portfolioImage);
+//    @SqlUpdate("INSERT INTO Privileged_User (id, first_name, last_name, salt, password_hash, email, number, title, role, picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+//    int insertPrivilegedUser(String id, String firstName, String lastName, String salt, String passwordHash, String email, String contactNumber, String title, String role, String portfolioImage);
 
-    @SqlUpdate("Privileged_User SET first_name = ?, last_name = ?, salt = ?, password = ?, email = ?, contact, title = ?, role = ?, picture = ? WHERE id = ?")
-    int updatePrivilegedUser( String firstName, String lastName, String salt, String passwordHash, String email, String contactNumber, String title, String role, String portfolioImage, String id);
+//    @SqlUpdate("Privileged_User SET first_name = ?, last_name = ?, salt = ?, password = ?, email = ?, number, title = ?, role = ?, picture = ? WHERE id = ?")
+//    int updatePrivilegedUser( String firstName, String lastName, String salt, String passwordHash, String email, String contactNumber, String title, String role, String portfolioImage, String id);
 
-    @SqlUpdate("DELETE FROM Privileged_User WHERE id = ?")
-    int deletePrivilegedUser(String id);
+//    @SqlUpdate("DELETE FROM Privileged_User WHERE id = ?")
+//    int deletePrivilegedUser(String id);
 }

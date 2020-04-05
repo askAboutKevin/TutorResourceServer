@@ -19,23 +19,25 @@ public class TutorService {
 
     public List<Tutor> selectAllTutors() {
 
-        List<Tutor> tutors = this.tutorDAO.selectAllTutors();
-
-        return tutors;
+        return this.tutorDAO.selectAllTutors();
     }
 
     public Tutor selectTutorById(String id) {
+
         if(id.length() < 8) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        Tutor tutor = this.tutorDAO.selectTutorById(id);
 
-        return tutor;
+        return this.tutorDAO.selectTutorById(id);
     }
 
     public Tutor selectTutorByEmail(String email) {
-        Tutor tutor = this.tutorDAO.selectTutorById(email);
-        return tutor;
+
+        if(email.length() < 1) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
+        return this.tutorDAO.selectTutorByEmail(email);
     }
 
     public int insertTutor(String topic, String firstName, String lastName, int school, int university, String supervisor, int department, String password, String email, String number) {
@@ -44,29 +46,29 @@ public class TutorService {
         String salt = SecureSalt.generateSalt();
         String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
 
-        int addedTutor = this.tutorDAO.insertTutor(id, topic, firstName, lastName, school, university, supervisor, department, salt, hash, email, number);
-
-        return addedTutor;
+        return this.tutorDAO.insertTutor(id, topic, firstName, lastName, school, university, supervisor, department, salt, hash, email, number);
     }
 
     public int updateTutorUsernamePassword(String password, String email, String number, String id) {
-        if(id.length() < 5) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-        String salt = SecureSalt.generateSalt();
-        String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
 
-        int updatedTutor = this.tutorDAO.updateTutorUsernamePassword(salt, hash, email, number, id);
-
-        return updatedTutor;
-    }
-
-    public int deleteTutor(String id) {
         if(id.length() < 8) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        int deletedTutors = this.tutorDAO.deleteTutor(id);
-        return deletedTutors;
+
+        // Future Add A Function to select whether we're changing the password, email or number
+
+        String salt = SecureSalt.generateSalt();
+        String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
+
+        return this.tutorDAO.updateTutorUsernamePassword(salt, hash, email, number, id);
+    }
+
+    public int deleteTutor(String id) {
+
+        if(id.length() < 8) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        return this.tutorDAO.deleteTutor(id);
     }
 
 }

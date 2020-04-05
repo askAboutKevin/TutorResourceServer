@@ -8,6 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Optional;
 
 @Path("/tutor")
 @Produces(MediaType.APPLICATION_JSON)
@@ -25,40 +26,35 @@ public class TutorResource {
 
         List<Tutor> tutors = this.tutorService.selectAllTutors();
 
-        if (tutors != null) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(tutors)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(tutors)
+                .build();
     }
 
     @GET
     @Path("/{identifier}")
-    public Response fetchTutorByIdentifier(@PathParam("identifier") String identifier) {
+    public Response fetchTutorByIdentifier(@PathParam("identifier") String identifier, @QueryParam("email") boolean email, @QueryParam("id") boolean id) {
 
-        Tutor tutor;
+        Tutor tutor = null;
 
-        tutor = this.tutorService.selectTutorById(identifier);
-
-        if (tutor != null) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(tutor)
-                    .build();
+        // If the identifier matches an email search the tutors by email
+        if(email) {
+            tutor = this.tutorService.selectTutorByEmail(identifier);
         }
 
-        tutor = this.tutorService.selectTutorByEmail(identifier);
-
-
-        if (tutor != null) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(tutor)
-                    .build();
+        // If the identifier matches a user id search the tutors by user id
+        if(id) {
+            tutor = this.tutorService.selectTutorById(identifier);
         }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+        // If it matches neither then the response will be empty/null
+        return Response
+                .status(Response.Status.OK)
+                .entity(tutor)
+                .build();
+
     }
 
     @POST
@@ -77,23 +73,14 @@ public class TutorResource {
                 tutor.getContact_number()
         );
 
-        if (tutorCreated == 1) {
-            return Response
-                    .status(Response.Status.CREATED)
-                    .entity(true)
-                    .build();
-        } else if (tutorCreated == 0) {
-            return Response
-                    .status(Response.Status.NOT_MODIFIED)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(tutorCreated == 1)
+                .build();
     }
 
     @PUT
-    @Path("/{id}")
-    public Response updateTutor(Tutor tutor, @PathParam("id") String id) {
+    public Response updateTutor(Tutor tutor) {
 
         int tutorUpdated = this.tutorService.updateTutorUsernamePassword(
                 tutor.getPassword_hash(),
@@ -102,18 +89,10 @@ public class TutorResource {
                 tutor.getId()
         );
 
-        if (tutorUpdated == 1) {
-            return Response
-                    .status(Response.Status.CREATED)
-                    .entity(true)
-                    .build();
-        } else if (tutorUpdated == 0) {
-            return Response
-                    .status(Response.Status.NOT_MODIFIED)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.OK)
+                .entity(tutorUpdated == 1)
+                .build();
     }
 
     @DELETE
@@ -122,17 +101,9 @@ public class TutorResource {
 
         int tutorDeleted = this.tutorService.deleteTutor(id);
 
-        if (tutorDeleted == 1) {
-            return Response
-                    .status(Response.Status.CREATED)
-                    .entity(true)
-                    .build();
-        } else if (tutorDeleted == 0) {
-            return Response
-                    .status(Response.Status.NOT_MODIFIED)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.OK)
+                .entity(tutorDeleted == 1)
+                .build();
     }
 }

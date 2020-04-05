@@ -14,6 +14,8 @@ public class StudentMapper implements RowMapper<Student> {
                 resultSet.getInt("id"),
                 resultSet.getInt("tutor_id"),
                 resultSet.getInt("school"),
-                resultSet.getString("name")
-        );    }
+                resultSet.getString("first_name"),
+                resultSet.getString("last_name")
+                );
+    }
 }

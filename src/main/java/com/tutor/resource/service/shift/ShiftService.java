@@ -3,6 +3,8 @@ package com.tutor.resource.service.shift;
 import com.tutor.resource.dal.dao.ShiftDAO;
 import com.tutor.resource.model.Shift;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ShiftService {
@@ -14,28 +16,35 @@ public class ShiftService {
     }
 
     public List<Shift> getAllShiftsForUser(String user) {
-        List<Shift> shifts = this.shiftDAO.selectAllShiftsForUser(user);
-        return shifts;
+
+        if(user.length() < 8) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
+        return this.shiftDAO.selectAllShiftsForUser(user);
     }
 
-    public List<Shift> getAllShiftsInPayPeriod(String periodStart, String periodEnd, String user) {
-
-        List<Shift> shifts = this.shiftDAO.selectAllShiftsInPayPeriod(periodStart, periodEnd, user);
-        return shifts;
-    }
+//    public List<Shift> getAllShiftsInPayPeriod(String periodStart, String periodEnd, String user) {
+//
+//        List<Shift> shifts = this.shiftDAO.selectAllShiftsInPayPeriod(periodStart, periodEnd, user);
+//        return shifts;
+//    }
 
     public int addShift(String user, String timeIn, String timeOut, String lunchOut, String lunchIn) {
 
+        if(user.length() < 8) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
+        // Add code to calculate the total time
         float totalTime = 0;
 
-        int addedShifts = this.shiftDAO.insertShift(user, timeIn, timeOut, lunchOut, lunchIn, totalTime);
-
-        return addedShifts;
+        return this.shiftDAO.insertShift(user, timeIn, timeOut, lunchOut, lunchIn, totalTime);
     }
 
-    public int updateShift(List<Integer> ids) {
-        int updatedShifts = this.shiftDAO.updateShift(ids);
-        return updatedShifts;
-    }
+//    public int updateShift(List<Integer> ids) {
+//        int updatedShifts = this.shiftDAO.updateShift(ids);
+//        return updatedShifts;
+//    }
 
 }

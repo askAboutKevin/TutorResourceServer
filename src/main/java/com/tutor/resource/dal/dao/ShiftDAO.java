@@ -16,15 +16,14 @@ public interface ShiftDAO {
     @RegisterRowMapper(ShiftMapper.class)
     List<Shift> selectAllShiftsForUser(String user);
 
-    @SqlQuery("SELECT id, user, date, time_in, time_out, lunch_out, lunch_in, logged, total_time FROM Shift WHERE date >= ? AND date <= ? WHERE user = ?")
-    @RegisterRowMapper(ShiftMapper.class)
-    List<Shift> selectAllShiftsInPayPeriod(String periodStart, String periodEnd, String user);
+//    @SqlQuery("SELECT id, user, date, time_in, time_out, lunch_out, lunch_in, logged, total_time FROM Shift WHERE date >= ? AND date <= ? WHERE user = ?")
+//    @RegisterRowMapper(ShiftMapper.class)
+//    List<Shift> selectAllShiftsInPayPeriod(String periodStart, String periodEnd, String user);
 
-    @SqlUpdate("INSERT INTO Shift VALUES (?, CURDATE(), ?, ?, ?, ?, ?")
-    @GetGeneratedKeys("id")
+    @SqlUpdate("INSERT INTO Shift (user, date, time_in, time_out, lunch_out, lunch_in, total_time) VALUES (?, CURDATE(), ?, ?, ?, ?, ?)")
     int insertShift(String user, String timeIn, String timeOut, String lunchOut, String lunchIn, float totalTime);
 
-    @SqlUpdate("UPDATE Shift SET logged = true WHERE id = ?")
-    int updateShift(List<Integer> ids);
+//    @SqlUpdate("UPDATE Shift SET logged = true WHERE id = ?")
+//    int updateShift(List<Integer> ids);
 
 }

@@ -32,20 +32,20 @@ public class ShiftResource {
                 .build();
     }
 
-    @GET
-    public Response fetchShiftsInPayPeriod(@QueryParam("user") String user, @QueryParam("start") String start, @QueryParam("end") String end ) {
-
-        List<Shift> shifts = this.shiftService.getAllShiftsInPayPeriod(
-                start,
-                end,
-                user
-        );
-
-        return Response
-                .status(Response.Status.OK)
-                .entity(shifts)
-                .build();
-    }
+//    @GET
+//    public Response fetchShiftsInPayPeriod(@QueryParam("user") String user, @QueryParam("start") String start, @QueryParam("end") String end ) {
+//
+//        List<Shift> shifts = this.shiftService.getAllShiftsInPayPeriod(
+//                start,
+//                end,
+//                user
+//        );
+//
+//        return Response
+//                .status(Response.Status.OK)
+//                .entity(shifts)
+//                .build();
+//    }
 
     @POST
     public Response addShift(Shift shift) {
@@ -58,42 +58,26 @@ public class ShiftResource {
                 shift.getLunch_in()
         );
 
-        if (shiftAdded == 1) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(true)
-                    .build();
-        } else if (shiftAdded == 0) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(shiftAdded == 1)
+                .build();
     }
 
-    @PUT
-    @Path("/{id}")
-    public Response logShift(@PathParam("id") int id) {
-
-        List<Integer> list = new ArrayList<>();
-        list.add(id);
-
-        int shiftLogged = this.shiftService.updateShift(list);
-
-        if (shiftLogged == 1) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(true)
-                    .build();
-        } else if (shiftLogged == 0) {
-            return Response
-                    .status(Response.Status.OK)
-                    .entity(false)
-                    .build();
-        }
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
-    }
+//    @PUT
+//    @Path("/log/{id}")
+//    public Response logShift(@PathParam("id") int id) {
+//
+//        List<Integer> list = new ArrayList<>();
+//        list.add(id);
+//
+//        int shiftLogged = this.shiftService.updateShift(list);
+//
+//        return Response
+//                .status(Response.Status.OK)
+//                .entity(shiftLogged == 1)
+//                .build();
+//    }
 
 }
 

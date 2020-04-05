@@ -12,11 +12,11 @@ import java.util.List;
 
 public interface DailyLogDAO {
 
-    @SqlQuery("SELECT id, tutor_id, tutor_name, date_of_tutoring, time_in_school, num_of_individual_students_tutored, num_of_student_groups_tutored, tutee_first_name, tutee_last_name, tutee_id, time_spent_one_on_one, time_spent_small_group, session_material")
+    @SqlQuery("SELECT id, tutor_id, tutor_name, date_of_tutoring, time_in_school, num_of_individual_students_tutored, num_of_student_groups_tutored, tutee_first_name, tutee_last_name, tutee_id, time_spent_one_on_one, time_spent_small_group, session_material FROM Daily_Log")
     @RegisterRowMapper(DailyLogMapper.class)
     List<DailyLog> selectAllDailyLogs();
 
-    @SqlQuery("SELECT id, tutor_id, tutor_name, date_of_tutoring, time_in_school, num_of_individual_students_tutored, num_of_student_groups_tutored, tutee_first_name, tutee_last_name, tutee_id, time_spent_one_on_one, time_spent_small_group, session_material WHERE tutor_id = ?")
+    @SqlQuery("SELECT id, tutor_id, tutor_name, date_of_tutoring, time_in_school, num_of_individual_students_tutored, num_of_student_groups_tutored, tutee_first_name, tutee_last_name, tutee_id, time_spent_one_on_one, time_spent_small_group, session_material FROM Daily_Log WHERE tutor_id = ?")
     @RegisterRowMapper(DailyLogMapper.class)
     List<DailyLog> selectAllDailyLogsByTutor(String id);
 

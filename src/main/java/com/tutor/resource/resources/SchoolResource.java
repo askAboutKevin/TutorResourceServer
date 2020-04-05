@@ -25,7 +25,7 @@ public class SchoolResource {
 
     @GET
     public Response getSchools() {
-        List<School> schools = this.schoolService.getAll();
+        List<School> schools = this.schoolService.getAllSchools();
 
         return Response
                 .status(Status.OK)
@@ -37,7 +37,7 @@ public class SchoolResource {
     @Path("/{id}")
     public Response getSchoolById(@PathParam("id") int id) {
 
-        School school = this.schoolService.getById(id);
+        School school = this.schoolService.getSchoolById(id);
 
         return Response
                 .status(Status.OK)
@@ -57,38 +57,39 @@ public class SchoolResource {
                 school.getNces_number(),
                 school.getSite_supervisor()
         );
+
         return Response
-                .status(Status.OK)
+                .status(Status.CREATED)
                 .entity(newSchoolId)
                 .build();
     }
 
-    @PUT
-    @Path("/{id}")
-    public Response editSchool(School school, @PathParam("id") int id) {
-
-        int updateSchool = this.schoolService.updateSchool(
-                school.getName(),
-                school.getStreetAddress(),
-                school.getCity(),
-                school.getState(),
-                school.getZip_code(),
-                school.getNces_number(),
-                school.getLongitude(),
-                school.getLatitude(),
-                school.getSite_supervisor(),
-                id
-        );
-
-        return Response
-                .status(Status.OK)
-                .entity(updateSchool)
-                .build();
-    }
+//    @PUT
+//    @Path("/{id}")
+//    public Response editSchool(School school, @PathParam("id") int id) {
+//
+//        int updateSchool = this.schoolService.updateSchool(
+//                school.getName(),
+//                school.getStreetAddress(),
+//                school.getCity(),
+//                school.getState(),
+//                school.getZip_code(),
+//                school.getNces_number(),
+//                school.getLongitude(),
+//                school.getLatitude(),
+//                school.getSite_supervisor(),
+//                id
+//        );
+//
+//        return Response
+//                .status(Status.ACCEPTED)
+//                .entity(updateSchool)
+//                .build();
+//    }
 
     @DELETE
     @Path("/{id}")
-    public Response deleteSchool(School school, @PathParam("id") int id) {
+    public Response deleteSchool(@PathParam("id") int id) {
 
         int deletedSchool = this.schoolService.deleteSchool(id);
 

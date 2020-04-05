@@ -21,10 +21,10 @@ public interface EventDAO {
     Event selectEventById(int id);
 
     @SqlUpdate("INSERT INTO Event (title, start, end, location, contact, details, reoccurring) VALUES (?, ?, ?, ?, ?, ?, ?)")
-    int insertEvent(String title, Date start, Date end, String location, String contact, String details, String reoccurring);
+    int insertEvent(String title, String start, String end, String location, String contact, String details, String reoccurring);
 
-    @SqlUpdate("UPDATE Event SET title = ?, start = ?, end = ?, location = ?, contact = ?, details = ?, reoccurring = ? WHERE id = ?")
-    int updateEvent(String title, Date start, Date end, String location, String contact, String details, String reoccurring, int id);
+//    @SqlUpdate("UPDATE Event SET title = ?, start = ?, end = ?, location = ?, contact = ?, details = ?, reoccurring = ? WHERE id = ?")
+//    int updateEvent(String title, Date start, Date end, String location, String contact, String details, String reoccurring, int id);
 
     @SqlUpdate("DELETE FROM Event WHERE id = ?")
     int deleteEvent(int id);

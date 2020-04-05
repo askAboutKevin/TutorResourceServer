@@ -1,19 +1,20 @@
 package com.tutor.resource.model;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Event {
 
     private int id;
     private String title;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
     private String location;
     private String contact;
     private String details;
     private String reoccurring;
 
-    public Event(int id, String title, Date start, Date end, String location, String contact, String details, String reoccurring) {
+    public Event(int id, String title, String start, String end, String location, String contact, String details, String reoccurring) {
         this.id = id;
         this.title = title;
         this.start = start;
@@ -24,7 +25,16 @@ public class Event {
         this.reoccurring = reoccurring;
     }
 
-    public Event(String title, Date start, Date end, String location, String contact, String details, String reoccurring) {
+    @JsonCreator
+    public Event(
+            @JsonProperty("title") String title,
+            @JsonProperty("start") String start,
+            @JsonProperty("end") String end,
+            @JsonProperty("location") String location,
+            @JsonProperty("contact") String contact,
+            @JsonProperty("details") String details,
+            @JsonProperty("reoccurring") String reoccurring
+    ) {
         this.title = title;
         this.start = start;
         this.end = end;
@@ -51,19 +61,19 @@ public class Event {
         this.title = title;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 

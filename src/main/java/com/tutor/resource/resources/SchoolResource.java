@@ -4,6 +4,7 @@ package com.tutor.resource.resources;
 import com.tutor.resource.model.School;
 import com.tutor.resource.service.school.SchoolService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -46,6 +47,7 @@ public class SchoolResource {
     }
 
     @POST
+    @RolesAllowed({"ADMINISTRATOR", "TUTOR"})
     public Response newSchool(School school) {
 
         int newSchoolId = this.schoolService.addSchool(
@@ -60,7 +62,7 @@ public class SchoolResource {
 
         return Response
                 .status(Status.CREATED)
-                .entity(newSchoolId)
+                .entity(newSchoolId == 1)
                 .build();
     }
 
@@ -89,6 +91,7 @@ public class SchoolResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"ADMINISTRATOR"})
     public Response deleteSchool(@PathParam("id") int id) {
 
         int deletedSchool = this.schoolService.deleteSchool(id);

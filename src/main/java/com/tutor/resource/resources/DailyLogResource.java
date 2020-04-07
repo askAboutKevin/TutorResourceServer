@@ -3,6 +3,7 @@ package com.tutor.resource.resources;
 import com.tutor.resource.model.DailyLog;
 import com.tutor.resource.service.dailyLog.DailyLogService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,6 +34,7 @@ public class DailyLogResource {
     }
 
     @POST
+    @RolesAllowed({"TUTOR"})
     public Response postDailyLog(DailyLog dailyLog) {
 
         int created = this.dailyLogService.createDailyLog(
@@ -58,6 +60,7 @@ public class DailyLogResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"ADMINISTRATOR", "TUTOR"})
     public Response deleteDailyLog(@PathParam("id") int id) {
 
         int deleted = this.dailyLogService.deleteDailyLog(id);

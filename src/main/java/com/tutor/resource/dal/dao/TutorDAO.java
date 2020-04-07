@@ -23,8 +23,8 @@ public interface TutorDAO {
     @RegisterRowMapper(TutorMapper.class)
     Tutor selectTutorByEmail(String email);
 
-    @SqlUpdate("INSERT INTO Tutor (id, topic, first_name, last_name, school, university, supervisor, department, salt, password, email, number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
-    int insertTutor(String id, String topic, String firstName, String lastName, int school, int university, String supervisor, int department, String salt, String password, String email, String number);
+    @SqlUpdate("INSERT INTO Tutor (id, topic, first_name, last_name, university, supervisor, department, salt, password, email, number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+    int insertTutor(String id, String topic, String firstName, String lastName, int university, String supervisor, int department, String salt, String password, String email, String number);
 
     @SqlUpdate("UPDATE Tutor SET salt = ?, password = ?, email = ?, number = ? WHERE id = ?")
     int updateTutorUsernamePassword(String salt, String password, String email, String number, String id);

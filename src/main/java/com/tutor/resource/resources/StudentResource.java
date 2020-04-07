@@ -3,6 +3,7 @@ package com.tutor.resource.resources;
 import com.tutor.resource.model.Student;
 import com.tutor.resource.service.student.StudentService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -34,12 +35,13 @@ public class StudentResource {
 
     // No Response To User Needed
     @POST
+    @RolesAllowed({"TUTOR"})
     public Response addStudent(Student student) {
 
         int studentAdded = this.studentService.insertStudent(student.getFirstName(), student.getLastName(), student.getTutorDailyTrackerId(), student.getSchool());
 
         return Response
-                .status(Response.Status.OK)
+                .status(Response.Status.CREATED)
                 .entity(studentAdded == 1)
                 .build();
 

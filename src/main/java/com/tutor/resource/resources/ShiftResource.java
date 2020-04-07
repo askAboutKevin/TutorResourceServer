@@ -3,6 +3,7 @@ package com.tutor.resource.resources;
 import com.tutor.resource.model.Shift;
 import com.tutor.resource.service.shift.ShiftService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -48,6 +49,7 @@ public class ShiftResource {
 //    }
 
     @POST
+    @RolesAllowed({"TUTOR"})
     public Response addShift(Shift shift) {
 
         int shiftAdded = this.shiftService.addShift(

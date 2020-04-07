@@ -4,6 +4,7 @@ package com.tutor.resource.resources;
 import com.tutor.resource.model.Event;
 import com.tutor.resource.service.event.EventService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -46,6 +47,7 @@ public class EventResource {
     }
 
     @POST
+    @RolesAllowed({"ADMINISTRATOR", "TUTOR"})
     public Response createEvent(Event event) {
 
         int created = this.eventService.insertEvent(
@@ -84,6 +86,7 @@ public class EventResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"ADMINISTRATOR", "TUTOR"})
     public Response deleteEvent(@PathParam("id") int id) {
 
         int deleted = this.eventService.deleteEvent(id);

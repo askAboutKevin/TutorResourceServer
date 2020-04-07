@@ -3,6 +3,7 @@ package com.tutor.resource.resources;
 import com.tutor.resource.model.PrivilegedUser;
 import com.tutor.resource.service.privilegedUser.PrivilegedUserService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

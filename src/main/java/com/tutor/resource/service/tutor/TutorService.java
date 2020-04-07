@@ -40,13 +40,13 @@ public class TutorService {
         return this.tutorDAO.selectTutorByEmail(email);
     }
 
-    public int insertTutor(String topic, String firstName, String lastName, int school, int university, String supervisor, int department, String password, String email, String number) {
+    public int insertTutor(String topic, String firstName, String lastName, int university, String supervisor, int department, String password, String email, String number) {
 
         String id = UniqueIdGenerator.generate("user");
         String salt = SecureSalt.generateSalt();
         String hash = PasswordHashSHA512.get_SHA_1_SecurePassword(password, salt);
 
-        return this.tutorDAO.insertTutor(id, topic, firstName, lastName, school, university, supervisor, department, salt, hash, email, number);
+        return this.tutorDAO.insertTutor(id, topic, firstName, lastName, university, supervisor, department, salt, hash, email, number);
     }
 
     public int updateTutorUsernamePassword(String password, String email, String number, String id) {

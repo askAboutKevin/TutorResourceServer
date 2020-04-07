@@ -4,6 +4,8 @@ import com.tutor.resource.model.PrivilegedUser;
 import com.tutor.resource.model.Tutor;
 import com.tutor.resource.service.tutor.TutorService;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,7 +27,6 @@ public class TutorResource {
     public Response fetchTutors() {
 
         List<Tutor> tutors = this.tutorService.selectAllTutors();
-
 
         return Response
                 .status(Response.Status.OK)
@@ -64,7 +65,6 @@ public class TutorResource {
                 tutor.getTopic(),
                 tutor.getFirst_name(),
                 tutor.getLast_name(),
-                tutor.getSchool(),
                 tutor.getUniversity(),
                 tutor.getSupervisor(),
                 tutor.getDepartment(),
@@ -80,6 +80,8 @@ public class TutorResource {
     }
 
     @PUT
+    @PermitAll
+    @RolesAllowed({"ADMINISTRATOR", "TUTOR"})
     public Response updateTutor(Tutor tutor) {
 
         int tutorUpdated = this.tutorService.updateTutorUsernamePassword(
@@ -97,6 +99,7 @@ public class TutorResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"ADMINISTRATOR", "TUTOR"})
     public Response deleteTutor(@PathParam("id") String id) {
 
         int tutorDeleted = this.tutorService.deleteTutor(id);

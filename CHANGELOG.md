@@ -1,10 +1,13 @@
 # Change Log
 
-## 04/05/2020
+## 04/06/2020
 * Fixed DAO SQL statements
 * Finalized all necessary HTTP Verbs for the mobile app
 * Updated database schema and model classes
 
+## 04/05/2020
+- Created auth package to enable basic authentication on endpoints
+- Secured most requests to write to database with authorization
 
 ## 04/03/2020
 - Initialized GitHub repo for TutorResource Server

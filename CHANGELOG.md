@@ -1,5 +1,10 @@
 # Change Log
 
+## 04/07/2020
+* Updated Makefile to include Docker as a tool
+* Create make command to create an image and start a container for the application
+* Created Dockerfile
+
 ## 04/06/2020
 * Fixed DAO SQL statements
 * Finalized all necessary HTTP Verbs for the mobile app

@@ -9,7 +9,7 @@ database:
   password: west9!9storK
 
   # the JDBC URL
-  url: jdbc:mysql://35.236.212.170:3306/TutorCorps?allowPublicKeyRetrieval=true&serverTimezone=America/New_York&useSSL=false
+  url: jdbc:mysql://localhost:3306/TutorCorp?allowPublicKeyRetrieval=true&serverTimezone=America/New_York&useSSL=false
 
 server:
   # ports & protocol to run the application on

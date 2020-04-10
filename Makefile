@@ -27,7 +27,7 @@ tools: ## Way to inspect which tools you require upon grabing this repo
 	@which $(DOCKER) >> /dev/null || (echo "Docker is not installed; please install it:\n    brew install docker" && exit 1)
 
 clean: ## Removes the JAR from the target directory
-	rm -f $(BUILD)/TutorResourceServer-0.0.1.jar
+	rm -f $(BUILD)/$(JAR_NAME)
 
 resolve: ## Resolve the applications dependencies
 	mvn dependency:resolve
@@ -41,8 +41,10 @@ server: ## Runs the application as an HTTP Server. This command requires a confi
 version: ## Displays the current version of the application
 	java -jar $(BUILD)/$(JAR_NAME) --version
 
-dockerize: compile
-	docker build -t tutor-resource-app:latest .
+dockerize: compile ## Builds the docker image with the application
+	docker build -t tutor-resource-app .
 
-container:
-	docker run -d -p 8080:8080 tutor-resource-app
+container: ## Runs a docker container instance of the app
+	docker stop resource_api
+	docker rm resource_api
+	docker run -d --name resource_api -p 80:8080 tutor-resource-app
